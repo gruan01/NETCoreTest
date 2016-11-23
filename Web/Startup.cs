@@ -16,6 +16,10 @@ using Data;
 
 namespace Web {
     public class Startup {
+
+        public IConfigurationRoot Configuration { get; }
+
+
         public Startup(IHostingEnvironment env) {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -30,23 +34,31 @@ namespace Web {
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
+
+        
+
+
+
+
         public void ConfigureServices(IServiceCollection services) {
-            // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
 
-            //var connStr = @"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;";
-            var connStr = Configuration.GetConnectionString("BlogDB");
-            services.AddDbContext<BloggingContext>(opt => opt.UseSqlServer(connStr, b=>b.MigrationsAssembly("Data")));
+            var connSqlSerer = Configuration.GetConnectionString("BlogDb_SQLServer");
+            services.AddDbContext<BloggingContext>(opt => opt.UseSqlServer(connSqlSerer, b => b.MigrationsAssembly("Data")));
+
+            //var connSqlMySql = Configuration.GetConnectionString("BlogDb_MySQL");
+            //services.AddDbContext<BloggingContext>(opt => opt.UseMySQL(connSqlMySql, b => b.MigrationsAssembly("Data")));
 
             services.AddTransient<IBlogs, BlogsImpl>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
+
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, BloggingContext ctx) {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();

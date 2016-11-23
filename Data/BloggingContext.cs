@@ -8,6 +8,7 @@ namespace Data {
         public virtual DbSet<Blog> Blog { get; set; }
         public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
+        public virtual DbSet<Comment> Comment { get; set; }
 
         public BloggingContext(DbContextOptions options)
             : base(options) {
