@@ -13,6 +13,7 @@ using Entity;
 using IBiz;
 using Biz;
 using Data;
+//using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace Web {
     public class Startup {
@@ -37,7 +38,7 @@ namespace Web {
 
 
 
-        
+
 
 
 
@@ -51,12 +52,15 @@ namespace Web {
             services.AddDbContext<BloggingContext>(opt => opt.UseSqlServer(connSqlSerer, b => b.MigrationsAssembly("Data")));
 
             //var connSqlMySql = Configuration.GetConnectionString("BlogDb_MySQL");
+            //Mysql官方驱动，有问题
+            //services.AddDbContext<BloggingContext>(opt => opt.UseMySQL(connSqlMySql, b => b.MigrationsAssembly("Data")));
+            //Mysql第三方驱动 Pomelo, 未设置自增长
             //services.AddDbContext<BloggingContext>(opt => opt.UseMySql(connSqlMySql, b => b.MigrationsAssembly("Data")));
 
             services.AddTransient<IBlogs, BlogsImpl>();
         }
 
-        
+
 
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, BloggingContext ctx) {
