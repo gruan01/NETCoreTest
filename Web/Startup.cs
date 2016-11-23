@@ -51,7 +51,7 @@ namespace Web {
             services.AddDbContext<BloggingContext>(opt => opt.UseSqlServer(connSqlSerer, b => b.MigrationsAssembly("Data")));
 
             //var connSqlMySql = Configuration.GetConnectionString("BlogDb_MySQL");
-            //services.AddDbContext<BloggingContext>(opt => opt.UseMySQL(connSqlMySql, b => b.MigrationsAssembly("Data")));
+            //services.AddDbContext<BloggingContext>(opt => opt.UseMySql(connSqlMySql, b => b.MigrationsAssembly("Data")));
 
             services.AddTransient<IBlogs, BlogsImpl>();
         }
