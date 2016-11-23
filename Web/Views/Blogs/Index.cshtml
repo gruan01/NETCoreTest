@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Blogs";
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model) {
+
+            <tr>
+                <td>@d.BlogId</td>
+                <td>@d.Url</td>
+            </tr>
+        }
+    </tbody>
+</table>
