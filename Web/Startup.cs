@@ -48,14 +48,15 @@ namespace Web {
 
             services.AddMvc();
 
-            var connSqlSerer = Configuration.GetConnectionString("BlogDb_SQLServer");
-            services.AddDbContext<BloggingContext>(opt => opt.UseSqlServer(connSqlSerer, b => b.MigrationsAssembly("Data")));
+            //var connSqlSerer = Configuration.GetConnectionString("BlogDb_SQLServer");
+            //services.AddDbContext<BloggingContext>(opt => opt.UseSqlServer(connSqlSerer, b => b.MigrationsAssembly("Data")));
 
             //var connSqlMySql = Configuration.GetConnectionString("BlogDb_MySQL");
+            var connSqlMySql = "server=192.168.18.20;user id=cnbooking;password=cnbooking;persistsecurityinfo=True;database=Bloger;sslmode=None";
             //Mysql官方驱动，有问题
             //services.AddDbContext<BloggingContext>(opt => opt.UseMySQL(connSqlMySql, b => b.MigrationsAssembly("Data")));
-            //Mysql第三方驱动 Pomelo, 未设置自增长
-            //services.AddDbContext<BloggingContext>(opt => opt.UseMySql(connSqlMySql, b => b.MigrationsAssembly("Data")));
+            //Mysql第三方驱动 Pomelo, 未设置自增长(因为最先是通过 SQLServer 生成的，删除 Migrations 后，切换到 MYSQL 下，重新迁移，就可以了)
+            services.AddDbContext<BloggingContext>(opt => opt.UseMySql(connSqlMySql, b => b.MigrationsAssembly("Data")));
 
             services.AddTransient<IBlogs, BlogsImpl>();
         }

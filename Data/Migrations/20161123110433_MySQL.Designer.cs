@@ -8,14 +8,13 @@ using Data;
 namespace Data.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20161123095457_Comment")]
-    partial class Comment
+    [Migration("20161123110433_MySQL")]
+    partial class MySQL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
 
             modelBuilder.Entity("Entity.Models.Blog", b =>
                 {
@@ -33,18 +32,17 @@ namespace Data.Migrations
             modelBuilder.Entity("Entity.Models.Comment", b =>
                 {
                     b.Property<long>("CommentID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<string>("Ctx")
-                        .HasAnnotation("MaxLength", 500);
+                        .HasMaxLength(500);
 
                     b.Property<int>("PostID");
 
                     b.Property<string>("User")
-                        .HasAnnotation("MaxLength", 10);
+                        .HasMaxLength(10);
 
                     b.Property<int?>("UserID");
 
@@ -58,8 +56,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Entity.Models.Post", b =>
                 {
                     b.Property<int>("PostId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("BlogId");
 
@@ -72,7 +69,7 @@ namespace Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 100);
+                        .HasMaxLength(100);
 
                     b.HasKey("PostId");
 
@@ -84,13 +81,12 @@ namespace Data.Migrations
             modelBuilder.Entity("Entity.Models.Tag", b =>
                 {
                     b.Property<int>("TagID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<string>("Title")
-                        .HasAnnotation("MaxLength", 10);
+                        .HasMaxLength(10);
 
                     b.HasKey("TagID");
 
