@@ -7,11 +7,7 @@ namespace Data {
     public static class BlogDBInitilizer {
 
         public static void Init(BloggingContext ctx) {
-            try {
-                ctx.Database.EnsureCreated();
-            }catch(Exception e) {
-
-            }
+            ctx.Database.EnsureCreated();
         }
 
     }
