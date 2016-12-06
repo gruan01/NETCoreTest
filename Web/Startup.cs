@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ESLog;
 //using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace Web {
@@ -81,6 +82,7 @@ namespace Web {
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, BloggingContext ctx) {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddProvider(new ESLogProvider());
 
             app.UseApplicationInsightsRequestTelemetry();
 

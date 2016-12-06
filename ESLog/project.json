@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Elasticsearch.Net": "2.5.0",
+    "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+    "NEST": "2.5.0",
+    "NETStandard.Library": "1.6.1"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

@@ -15,6 +15,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Data", "Data\Data.xproj", "
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Common", "Common\Common.xproj", "{821B3EBA-1EB0-4ADF-A364-69FF63C6C5F4}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ESLog", "ESLog\ESLog.xproj", "{27DE3C16-9379-4C10-8719-5A05B11D4BA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{821B3EBA-1EB0-4ADF-A364-69FF63C6C5F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{821B3EBA-1EB0-4ADF-A364-69FF63C6C5F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{821B3EBA-1EB0-4ADF-A364-69FF63C6C5F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27DE3C16-9379-4C10-8719-5A05B11D4BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DE3C16-9379-4C10-8719-5A05B11D4BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DE3C16-9379-4C10-8719-5A05B11D4BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DE3C16-9379-4C10-8719-5A05B11D4BA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
