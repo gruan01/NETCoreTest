@@ -20,6 +20,10 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ESLog;
+using NuGet.Configuration;
+using System.IO;
+using System.Reflection;
+using Common;
 //using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace Web {
@@ -53,6 +57,8 @@ namespace Web {
         public void ConfigureServices(IServiceCollection services) {
             services.AddApplicationInsightsTelemetry(Configuration);
 
+
+            #region 数据库设置
             //var connSqlSerer = Configuration.GetConnectionString("BlogDb_SQLServer");
             //services.AddDbContext<BloggingContext>(opt => opt.UseSqlServer(connSqlSerer, b => b.MigrationsAssembly("Data")));
 
@@ -62,7 +68,9 @@ namespace Web {
             //services.AddDbContext<BloggingContext>(opt => opt.UseMySQL(connSqlMySql, b => b.MigrationsAssembly("Data")));
             //Mysql第三方驱动 Pomelo, 未设置自增长(因为最先是通过 SQLServer 生成的，删除 Migrations 后，切换到 MYSQL 下，重新迁移，就可以了)
             services.AddDbContext<BloggingContext>(opt => opt.UseMySql(connSqlMySql, b => b.MigrationsAssembly("Data")));
+            #endregion
 
+            #region 认证方式
             services.AddAuthorization(a => {
                 var b = new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
@@ -70,10 +78,13 @@ namespace Web {
                     .Build();
                 a.AddPolicy("Bearer", b);
             });
+            #endregion
 
             services.AddMvc();
 
+            #region 依赖注入
             services.AddTransient<IBlogs, BlogsImpl>();
+            #endregion
         }
 
 
@@ -82,7 +93,7 @@ namespace Web {
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, BloggingContext ctx) {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            loggerFactory.AddProvider(new ESLogProvider());
+            //loggerFactory.AddProvider(new ESLogProvider());
 
             app.UseApplicationInsightsRequestTelemetry();
 
@@ -101,6 +112,7 @@ namespace Web {
             #region exception
             app.UseExceptionHandler(o => {
                 o.Use(async (context, next) => {
+
                     var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
                     if (error != null) {
                         if (error.Error is SecurityTokenExpiredException) {
@@ -147,6 +159,8 @@ namespace Web {
             #endregion
 
             BlogDBInitilizer.Init(ctx);
+
+            app.UseSeetings();
         }
     }
 }

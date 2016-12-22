@@ -7,6 +7,8 @@ using Entity.Models;
 using Entity;
 using IBiz;
 using Microsoft.Extensions.Logging;
+using Common;
+using Web.Models;
 
 namespace Web.Controllers {
     public class BlogsController : Controller {
@@ -23,6 +25,8 @@ namespace Web.Controllers {
 
 
         public IActionResult Index() {
+            var test = Settings.Get<Test>();
+
             var datas = this.Biz.GetAll();
             this.Log.LogInformation(1, "here");
             return View(datas);
